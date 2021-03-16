@@ -8,23 +8,28 @@ const NavBar = st.div`
     left: 0;
     width: 100%;
     display: flex;
-    padding: 1rem;
-    border-bottom: solid 1px #225599ff;
-    background-color: #22559911;
+    padding-top: 0.5rem;
+    border-bottom: solid 1px #2f8da7ff;
+    z-index: 1;
+    background-color: #fff;
 `;
 
 const NavLinks = st(NavLink)`
     text-decoration: none;
     cursor: pointer;
-    color: #225599aa;
+    color: #2f8da7aa;
     font-weight: 700;
     font-size: 20px;
-    margin-right: 1rem;
+    border-top-right-radius: 10px;
+    border-top-left-radius: 10px;
+    padding: 1rem;
     &:hover {
-        color: #225599ff;
+        color: #fff;
+        background-color: #2f8da7ff;
     }
     &.active {
-        color: #225599ff;
+        color: #fff;
+        background-color: #2f8da7ff;
     }
 `; 
 
