@@ -22,7 +22,7 @@ const AppWrapper = st.div`
 
 export const App = () => {
 
-  console.log('covid-india-stats || v1.0.4');
+  console.log(`${config.appName} || ${config.version} || ${config.envr}`);
   console.log(`Ntfl var: ${config.netlifyVar}`);
 
   return (
