@@ -18,9 +18,9 @@ const DataWrapper = st.div`
     border-radius: 10px;
     box-shadow: 0 0 5px 2px #9ac;
     border: 1px solid #999;
-    width: 500px;
+    width: 30rem;
     @media only screen and (max-width: 599px) {
-        width: 100%;
+        width: 15rem;
     }
     background-color: #fff;
 `;

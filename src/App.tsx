@@ -16,7 +16,7 @@ const AppContainer = st.div`
 `;
 
 const AppWrapper = st.div`
-  padding: 0 5rem;
+  padding: 0 1rem;
 `;
 
 export const App = () => {
