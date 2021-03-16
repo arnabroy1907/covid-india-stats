@@ -5,6 +5,7 @@ import st from 'styled-components';
 import { Route, Switch } from 'react-router';
 import { WorldData } from './WorldData';
 import { IndiaData } from './IndiaData';
+import config from './config';
 
 const AppContainer = st.div`
   background-color: #2f8da755;
@@ -20,6 +21,10 @@ const AppWrapper = st.div`
 `;
 
 export const App = () => {
+
+  console.log('covid-india-stats || v1.0.4');
+  console.log(`Ntfl var: ${config.netlifyVar}`);
+
   return (
     <>
     <GlobalStyle />
