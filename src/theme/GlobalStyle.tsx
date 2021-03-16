@@ -5,6 +5,7 @@ export const GlobalStyle = createGlobalStyle`
     body {
         margin: 0;
         font-size: 16px;
+        background-color: #2f8da755;
         -webkit-font-smoothing: antialiased;
         -moz-osx-font-smoothing: grayscale;
         font-family: "Segoe UI", "Segoe UI Web (West European)", "Segoe UI", -apple-system, BlinkMacSystemFont, Roboto, "Helvetica Neue", sans-serif;

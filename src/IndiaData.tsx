@@ -2,8 +2,19 @@ import React, { useState, useEffect } from "react";
 import { DataCard } from "./DataCard";
 import { IndiaApiResponse } from "./types";
 import { getIndiaData } from './common.util';
+import st from 'styled-components';
+import loader from './assets/loader.gif';
+
+const LoadingWrapper = st.div`
+  padding: 1rem;
+  img {
+    width: 5rem;
+    height: 5rem;
+  }
+`;
 
 export const IndiaData = () => {
+  const [loading, setLoading] = useState<boolean>(true);
   const [indiaApiData, setIndiaApiData] = useState<IndiaApiResponse|undefined>();
   const [indiaError, setIndiaError] = useState<string>('');
 
@@ -12,9 +23,11 @@ export const IndiaData = () => {
       try {
         const indiaData: IndiaApiResponse = await getIndiaData();
         setIndiaApiData(indiaData);
+        setLoading(false);
       } catch (err) {
         console.error(err);
         setIndiaError('Something went wrong.');
+        setLoading(false);
       }
     };
 
@@ -23,11 +36,16 @@ export const IndiaData = () => {
 
   return (
     <>
+      {loading && (
+        <LoadingWrapper>
+          <img alt='Loading' src={loader} />
+        </LoadingWrapper>
+      )}
       {indiaError && <h1> {indiaError} </h1>}
       {indiaApiData && (
         <>
           <DataCard
-            headerColor={"#f0f"}
+            headerColor={"#385"}
             headerName={"India"}
             data={{
               activeCases: indiaApiData.total_values.active,

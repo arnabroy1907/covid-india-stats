@@ -8,8 +8,8 @@ const NavBar = st.div`
     left: 0;
     width: 100%;
     display: flex;
-    padding-top: 0.5rem;
     border-bottom: solid 1px #2f8da7ff;
+    box-shadow 0 -2px 5px #222;
     z-index: 1;
     background-color: #fff;
 `;
@@ -20,8 +20,6 @@ const NavLinks = st(NavLink)`
     color: #2f8da7aa;
     font-weight: 700;
     font-size: 20px;
-    border-top-right-radius: 10px;
-    border-top-left-radius: 10px;
     padding: 1rem;
     &:hover {
         color: #fff;

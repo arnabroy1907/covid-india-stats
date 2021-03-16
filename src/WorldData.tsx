@@ -1,9 +1,20 @@
 import React, { useState, useEffect } from "react";
+import st from 'styled-components';
 import { DataCard } from "./DataCard";
 import { WorldApiResponse } from "./types";
 import { getWorldData } from './common.util';
+import loader from './assets/loader.gif';
+
+const LoadingWrapper = st.div`
+  padding: 1rem;
+  img {
+    width: 5rem;
+    height: 5rem;
+  }
+`;
 
 export const WorldData = () => {
+    const [loading, setLoading] = useState<boolean>(true);
     const [worldApiData, setWorldApiData] = useState<WorldApiResponse|undefined>();
     const [worldError, setWorldError] = useState<string>('');
   
@@ -12,9 +23,11 @@ export const WorldData = () => {
         try {
           const worldData: WorldApiResponse = await getWorldData();
           setWorldApiData(worldData);
+          setLoading(false);
         } catch (err) {
           console.error(err);
           setWorldError('Something went wrong.');
+          setLoading(false);
         }
       };
 
@@ -23,11 +36,16 @@ export const WorldData = () => {
 
   return (
     <>
+      {loading && (
+        <LoadingWrapper>
+          <img alt='Loading' src={loader} />
+        </LoadingWrapper>
+      )}
       {worldError && <h1> {worldError} </h1>}
       {worldApiData && (
         <>
           <DataCard
-            headerColor={"#f00"}
+            headerColor={"#853"}
             headerName={"Global"}
             data={{
               activeCases: worldApiData.world_total.active_cases,
