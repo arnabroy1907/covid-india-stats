@@ -19,7 +19,7 @@ const DataWrapper = st.div`
     padding: 0;
     margin-bottom: 2rem;
     border-radius: 10px;
-    box-shadow: 0 0 3px 4px #222;
+    box-shadow: 0 0 6px 3px #000;
     border: 1px solid #000;
     width: 100%;
     max-width: 50rem;

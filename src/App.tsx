@@ -5,11 +5,17 @@ import st from 'styled-components';
 import { Redirect, Route, Switch } from 'react-router';
 import { WorldData } from './WorldData';
 import { IndiaData } from './IndiaData';
+import { Footer } from './Footer';
+import { BackToTop } from './BackToTop';
+import covidBg from './assets/covid-bg.jpg';
 
 const AppContainer = st.div`
   padding-top: 5rem;
   display: flex;
   justify-content: center;
+  min-height: calc(100vh - 11rem);
+  background-image: url(${covidBg});
+  background-size: contain;
 `;
 
 const AppWrapper = st.div`
@@ -38,6 +44,8 @@ export const App = () => {
         </Switch>
       </AppWrapper>
     </AppContainer>
+      <BackToTop />
+      <Footer />
     </>
   );
 }
