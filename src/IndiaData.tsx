@@ -1,22 +1,16 @@
 import React, { useState, useEffect } from "react";
 import { DataCard } from "./DataCard";
-import { IndiaApiResponse } from "./types";
+import { IndiaApiResponse, StateData } from "./types";
 import { getIndiaData } from './common.util';
-import st from 'styled-components';
 import loader from './assets/loader.gif';
-
-const LoadingWrapper = st.div`
-  padding: 1rem;
-  img {
-    width: 5rem;
-    height: 5rem;
-  }
-`;
+import { LoadingWrapper, ErrorText, ShowMoreButton } from './common.styles';
+import config from "./config";
 
 export const IndiaData = () => {
   const [loading, setLoading] = useState<boolean>(true);
   const [indiaApiData, setIndiaApiData] = useState<IndiaApiResponse|undefined>();
   const [indiaError, setIndiaError] = useState<string>('');
+  const [listLimit, setListLimit] = useState<number>(10);
 
   useEffect(() => {
     const assignIndiaData = async () => {
@@ -26,13 +20,23 @@ export const IndiaData = () => {
         setLoading(false);
       } catch (err) {
         console.error(err);
-        setIndiaError('Something went wrong.');
+        setIndiaError(config.errorMessage);
         setLoading(false);
       }
     };
 
     assignIndiaData();
   }, []);
+
+  const stateList: StateData[] = [];
+  if (indiaApiData) {
+    let iter = 0;
+    for (let state in indiaApiData.state_wise) {
+      if (iter >= listLimit) break;
+      stateList.push(indiaApiData.state_wise[state]);
+      iter++;
+    }
+  }
 
   return (
     <>
@@ -41,11 +45,11 @@ export const IndiaData = () => {
           <img alt='Loading' src={loader} />
         </LoadingWrapper>
       )}
-      {indiaError && <h1> {indiaError} </h1>}
+      {indiaError && <ErrorText> {indiaError} </ErrorText>}
       {indiaApiData && (
         <>
           <DataCard
-            headerColor={"#385"}
+            headerColor={"#8ea"}
             headerName={"India"}
             data={{
               activeCases: indiaApiData.total_values.active,
@@ -58,11 +62,12 @@ export const IndiaData = () => {
             }}
           />
           {
-            Object.entries(indiaApiData.state_wise).map(([state, stateData]) =>
+            stateList.map((stateData, rank) =>
               <DataCard
-                key={state}
-                headerColor={"#2f8da7"}
-                headerName={state}
+                key={stateData.state}
+                headerColor={"#87e5e5"}
+                headerName={stateData.state}
+                rank={rank + 1}
                 data={{
                   activeCases: stateData.active,
                   totalCases: stateData.confirmed,
@@ -72,8 +77,12 @@ export const IndiaData = () => {
                   newDeaths: stateData.deltadeaths,
                   newRecovered: stateData.deltarecovered
                 }}
+                districtData={stateData.district}
               />
             )
+          }
+          { (listLimit <= Object.keys(indiaApiData.state_wise).length) && 
+            <ShowMoreButton onClick={() => { setListLimit(listLimit + 10); }}>Show More</ShowMoreButton>
           }
         </>
       )}

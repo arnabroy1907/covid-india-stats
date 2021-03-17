@@ -11,10 +11,10 @@ const NavBar = st.div`
     height: 3rem;
     display: flex;
     align-items: center;
-    border-bottom: solid 1px #2f8da7ff;
-    box-shadow 0 1px 4px #69a;
+    border-bottom: solid 1px #000;
+    box-shadow 0 2px 6px #000;
     z-index: 1;
-    background-color: #fff;
+    background-color: #222;
 `;
 
 const NavLinks = st(NavLink)`
@@ -22,18 +22,18 @@ const NavLinks = st(NavLink)`
     align-items: center;
     text-decoration: none;
     cursor: pointer;
-    color: #2f8da7ff;
+    color: #fff;
     font-weight: 700;
     font-size: 20px;
     height: 3rem;
     padding: 0 1rem;
     &:hover {
-        color: #fff;
-        background-color: #2f8da7ff;
+        color: #000;
+        background-color: #fff;
     }
     &.active {
-        color: #fff;
-        background-color: #2f8da7ff;
+        color: #000;
+        background-color: #fff;
     }
 `; 
 
@@ -55,7 +55,7 @@ export const Navbar = () => {
                 <img alt='covid-logo' src={covidLogo} />
             </LogoWrapper>
             <NavLinks exact to='/'>WORLD</NavLinks>
-            <NavLinks exact to='/india'>INDIA</NavLinks>
+            <NavLinks to='/india'>INDIA</NavLinks>
         </NavBar>
     )
 };

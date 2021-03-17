@@ -1,22 +1,16 @@
 import React, { useState, useEffect } from "react";
-import st from 'styled-components';
 import { DataCard } from "./DataCard";
-import { WorldApiResponse } from "./types";
+import { WorldApiResponse, WorldData as WorldDataType } from "./types";
 import { getWorldData } from './common.util';
 import loader from './assets/loader.gif';
-
-const LoadingWrapper = st.div`
-  padding: 1rem;
-  img {
-    width: 5rem;
-    height: 5rem;
-  }
-`;
+import { LoadingWrapper, ErrorText, ShowMoreButton } from './common.styles';
+import config from "./config";
 
 export const WorldData = () => {
     const [loading, setLoading] = useState<boolean>(true);
     const [worldApiData, setWorldApiData] = useState<WorldApiResponse|undefined>();
     const [worldError, setWorldError] = useState<string>('');
+    const [listLimit, setListLimit] = useState<number>(10);
   
     useEffect(() => {
       const assignWorldData = async () => {
@@ -26,13 +20,18 @@ export const WorldData = () => {
           setLoading(false);
         } catch (err) {
           console.error(err);
-          setWorldError('Something went wrong.');
+          setWorldError(config.errorMessage);
           setLoading(false);
         }
       };
 
       assignWorldData();
     }, []);
+
+    let countryList: WorldDataType[] = [];
+    if (worldApiData) {
+      countryList = worldApiData.countries_stat.slice(0, listLimit);
+    }
 
   return (
     <>
@@ -41,11 +40,11 @@ export const WorldData = () => {
           <img alt='Loading' src={loader} />
         </LoadingWrapper>
       )}
-      {worldError && <h1> {worldError} </h1>}
+      {worldError && <ErrorText> {worldError} </ErrorText>}
       {worldApiData && (
         <>
           <DataCard
-            headerColor={"#853"}
+            headerColor={"#ea8"}
             headerName={"Global"}
             data={{
               activeCases: worldApiData.world_total.active_cases,
@@ -56,11 +55,12 @@ export const WorldData = () => {
               newDeaths: worldApiData.world_total.new_deaths,
             }}
           />
-          {worldApiData.countries_stat.map((country) => (
+          {countryList.map((country, rank) => (
             <DataCard
               key={country.country_name}
-              headerColor={"#2f8da7"}
+              headerColor={"#87e5e5"}
               headerName={country.country_name}
+              rank={rank + 1}
               data={{
                 activeCases: country.active_cases,
                 totalCases: country.cases,
@@ -71,6 +71,9 @@ export const WorldData = () => {
               }}
             />
           ))}
+          { (listLimit <= worldApiData.countries_stat.length) && 
+            <ShowMoreButton onClick={() => { setListLimit(listLimit + 10); }}>Show More</ShowMoreButton>
+          }
         </>
       )}
     </>

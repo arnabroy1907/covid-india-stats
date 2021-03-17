@@ -44,6 +44,19 @@ export interface IndiaTotal {
     lastupdatedtime: string;
 }
 
+export interface DistrictData {
+    active: number;
+    confirmed: number;
+    deceased: number;
+    recovered: number;
+    name: string;
+    delta: {
+        confirmed: number;
+        deceased: number;
+        recovered: number;
+    }
+}
+
 export interface StateData {
     confirmed: string;
     active: string;
@@ -53,18 +66,8 @@ export interface StateData {
     deltadeaths: string;
     deltarecovered: string;
     state: string;
-    districts: {
-        [key: string]: {
-            active: string;
-            confirmed: string;
-            deceased: string;
-            recovered: string;
-            delta: {
-                confirmed: string;
-                deceased: string;
-                recovered: string;
-            }
-        }
+    district: {
+        [key: string]: DistrictData;
     }
 }
 

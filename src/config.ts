@@ -4,4 +4,5 @@ export default {
     covidDataApi: 'https://corona-virus-world-and-india-data.p.rapidapi.com',
     apiKey: process.env.REACT_APP_COVID_API_KEY,
     envr: process.env.NODE_ENV,
+    errorMessage: 'Something went wrong! Please try again after some time.'
 };
