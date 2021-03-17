@@ -2,7 +2,7 @@ import React from 'react';
 import { Navbar } from './Navbar';
 import { GlobalStyle } from './theme/GlobalStyle';
 import st from 'styled-components';
-import { Route, Switch } from 'react-router';
+import { Redirect, Route, Switch } from 'react-router';
 import { WorldData } from './WorldData';
 import { IndiaData } from './IndiaData';
 import config from './config';
@@ -37,6 +37,7 @@ export const App = () => {
         <Switch>
           <Route exact path='/' render={() => <WorldData />} />
           <Route exact path='/india' render={() => <IndiaData />} />
+          <Route render={() => <Redirect to='/' />} />
         </Switch>
       </AppWrapper>
     </AppContainer>
