@@ -26,6 +26,7 @@ export const IndiaData = () => {
     };
 
     assignIndiaData();
+    window.scrollTo(0,0);
   }, []);
 
   const stateList: StateData[] = [];

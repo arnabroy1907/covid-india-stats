@@ -26,6 +26,7 @@ export const WorldData = () => {
       };
 
       assignWorldData();
+      window.scrollTo(0,0);
     }, []);
 
     let countryList: WorldDataType[] = [];
