@@ -5,7 +5,6 @@ import st from 'styled-components';
 import { Redirect, Route, Switch } from 'react-router';
 import { WorldData } from './WorldData';
 import { IndiaData } from './IndiaData';
-import config from './config';
 
 const AppContainer = st.div`
   padding-top: 5rem;
@@ -25,8 +24,6 @@ const AppWrapper = st.div`
 `;
 
 export const App = () => {
-
-  console.log(`${config.appName} || ${config.version} || ${config.envr}`);
 
   return (
     <>

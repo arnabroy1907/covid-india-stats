@@ -12,7 +12,7 @@ const NavBar = st.div`
     display: flex;
     align-items: center;
     border-bottom: solid 1px #2f8da7ff;
-    box-shadow 0 -2px 5px #222;
+    box-shadow 0 1px 4px #69a;
     z-index: 1;
     background-color: #fff;
 `;
