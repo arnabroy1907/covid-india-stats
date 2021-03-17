@@ -22,7 +22,7 @@ const NavLinks = st(NavLink)`
     align-items: center;
     text-decoration: none;
     cursor: pointer;
-    color: #2f8da7aa;
+    color: #2f8da7ff;
     font-weight: 700;
     font-size: 20px;
     height: 3rem;
