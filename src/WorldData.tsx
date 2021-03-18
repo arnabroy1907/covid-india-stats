@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { DataCard } from "./DataCard";
 import { WorldApiResponse, WorldData as WorldDataType } from "./types";
-import { getWorldData } from './util/common.util';
+import { getDateTimeString, getWorldData } from './util/common.util';
 import loader from './assets/loader.gif';
 import { LoadingWrapper, ErrorText, ShowMoreButton, TimeInfo } from './common.styles';
 import config from "./config";
@@ -44,7 +44,10 @@ export const WorldData = () => {
       {worldError && <ErrorText> {worldError} </ErrorText>}
       {worldApiData && (
         <>
-          <TimeInfo> Data taken at: {new Date(worldApiData.statistic_taken_at).toLocaleString()} </TimeInfo>
+          <TimeInfo>
+            <h1> Data taken at: </h1>
+            <h2> {getDateTimeString(worldApiData.statistic_taken_at)} </h2>
+          </TimeInfo>
           <DataCard
             headerColor={"#ea8"}
             headerName={"Global"}

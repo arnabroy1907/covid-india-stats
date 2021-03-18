@@ -1,9 +1,12 @@
 import axios from 'axios';
 import config from '../config';
 import { IndiaApiResponse, WorldApiResponse } from '../types';
+import dnt from 'date-and-time';
+const ordinal = require('date-and-time/plugin/ordinal');
 
 const worldResponseKey = 'world-data';
 const indiaResponseKey = 'india-data';
+dnt.plugin(ordinal);
 
 const saveDataInLocalStorage = (data: WorldApiResponse|IndiaApiResponse, key: string) => {
     window.localStorage.setItem(key, JSON.stringify(data));
@@ -91,4 +94,24 @@ export const formatNumberString: Function = (numberString: string): string => {
         str.substr(str.length - 7, 2) + ',' +
         str.substr(str.length - 5, 2) + ',' +
         str.substr(str.length - 3, 3);
+};
+
+/**
+ * Potential input: 18/3/2021 02:24:47 and 2021-03-17 23:58:01
+ * @param dateTimeStr
+ */
+export const getDateTimeString = (dateTimeStr: string) => {
+    // For world time scenario
+    if (dateTimeStr.match('-')) {
+        const date: Date = dnt.parse(dateTimeStr, 'YYYY-MM-DD HH:mm:ss', true);
+        return dnt.format(date, 'dddd, DDD MMMM YYYY hh:mm:ss A');
+    }
+
+    // For india time scenario
+    if (dateTimeStr.match('/')) {
+        const date: Date = dnt.parse(dateTimeStr, 'D/M/YYYY HH:mm:ss', true);
+        return dnt.format(date, 'dddd, DDD MMMM YYYY hh:mm:ss A');
+    }
+
+    return dateTimeStr;
 };

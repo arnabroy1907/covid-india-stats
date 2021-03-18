@@ -20,11 +20,25 @@ export const ErrorText = st.div`
   width: 90%;
 `;
 
-export const TimeInfo = st.h1`
-  font-size: 20px;
-  font-weight: 700;
-  font-style: italic;
-  color: #fff;
+export const TimeInfo = st.div`
+  background-color: #b9f7e5;
+  border-radius: 5px;
+  border: #000;
+  box-shadow: 0 0 6px 3px #000;
+  margin-bottom: 2rem;
+  padding: 0 1rem;
+  color: #154437;
+  text-align: center;
+  line-height: 0.6;
+  letter-spacing: 1px;
+  h1 {
+    font-size: 20px;
+    font-weight: 700;
+  }
+  h2 {
+    font-size: 18px;
+    font-weight: 700;
+  }
 `;
 
 export const ShowMoreButton = st.span`

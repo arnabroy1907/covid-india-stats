@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { DataCard } from "./DataCard";
 import { IndiaApiResponse, StateData } from "./types";
-import { getIndiaData } from './util/common.util';
+import { getDateTimeString, getIndiaData } from './util/common.util';
 import loader from './assets/loader.gif';
 import { LoadingWrapper, ErrorText, ShowMoreButton, TimeInfo } from './common.styles';
 import config from "./config";
@@ -49,7 +49,10 @@ export const IndiaData = () => {
       {indiaError && <ErrorText> {indiaError} </ErrorText>}
       {indiaApiData && (
         <>
-          <TimeInfo> Data taken at: {indiaApiData.total_values.lastupdatedtime.replace(' ', ', ')} </TimeInfo>
+          <TimeInfo>
+            <h1> Data taken at: </h1>
+            <h2>{getDateTimeString(indiaApiData.total_values.lastupdatedtime)} </h2>
+          </TimeInfo>
           <DataCard
             headerColor={"#8ea"}
             headerName={"India"}
