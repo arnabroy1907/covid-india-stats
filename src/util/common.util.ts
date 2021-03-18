@@ -51,7 +51,7 @@ export const formatNumberString: Function = (numberString: string): string => {
 
     // if number is more than 1 thousand and less than 1 lakh
     if (str.length < 6) {
-        return str.substr(0, str.length - 3) + 'b' + str.substr(str.length - 3, 3);
+        return str.substr(0, str.length - 3) + ',' + str.substr(str.length - 3, 3);
     }
 
     // if number is more than 1 lakh and less than 1 crore
