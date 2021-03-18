@@ -29,15 +29,17 @@ export const TimeInfo = st.div`
   padding: 0 1rem;
   color: #154437;
   text-align: center;
-  line-height: 0.6;
+  line-height: 1.2;
   letter-spacing: 1px;
   h1 {
     font-size: 20px;
     font-weight: 700;
+    margin-bottom: 0.5rem;
   }
   h2 {
     font-size: 18px;
     font-weight: 700;
+    margin-top: 0;
   }
 `;
 
