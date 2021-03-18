@@ -19,7 +19,7 @@ interface DataProps {
 const DataWrapper = st.div`
     padding: 0;
     margin-bottom: 2rem;
-    border-radius: 10px;
+    border-radius: 5px;
     box-shadow: 0 0 6px 3px #000;
     border: 1px solid #000;
     width: 100%;
@@ -32,8 +32,8 @@ const DataHeader = st.div`
     color: #000;
     padding: 0.5rem;
     padding-left: 2rem;
-    border-top-left-radius: 10px;
-    border-top-right-radius: 10px;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
     font-size: 20px;
     font-weight: 700;
 `;
@@ -88,7 +88,9 @@ const DistWrapper = st.div`
     width: 100%;
     max-width: 50rem;
     background-color: #333;
-    border-radius: 10px;
+    box-shadow: 0 0 6px 3px #111;
+    border: 1px solid #111;
+    border-radius: 5px;
     margin: 1rem 0;
 `;
 

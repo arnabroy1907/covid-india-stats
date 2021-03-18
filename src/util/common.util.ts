@@ -2,34 +2,59 @@ import axios from 'axios';
 import config from '../config';
 import { IndiaApiResponse, WorldApiResponse } from '../types';
 
-export const getWorldData = async () => {
-    const resp = await axios.get<WorldApiResponse>(`${config.covidDataApi}/api`, {
-        headers: {
-            'x-rapidapi-key': config.apiKey
-        },
-        timeout: 5000
-    });
+const worldResponseKey = 'world-data';
+const indiaResponseKey = 'india-data';
 
-    if (!resp || !resp.data) {
-        throw new Error('No data for getWorldData');
-    }
-
-    return resp.data;
+const saveDataInLocalStorage = (data: WorldApiResponse|IndiaApiResponse, key: string) => {
+    window.localStorage.setItem(key, JSON.stringify(data));
 };
 
-export const getIndiaData = async () => {
-    const resp = await axios.get<IndiaApiResponse>(`${config.covidDataApi}/api_india`, {
-        headers: {
-            'x-rapidapi-key': config.apiKey
-        },
-        timeout: 5000
-    });
+const getItemFromLocalStorage = (key: string): any => {
+    const dataString = window.localStorage.getItem(key);
+    if (!dataString) throw new Error(`No Data present in cache too for: ${key}`);
+    return JSON.parse(dataString);
+}
 
-    if (!resp || !resp.data) {
-        throw new Error('No data for getIndiaData');
+export const getWorldData = async (): Promise<WorldApiResponse> => {
+    try {
+        const resp = await axios.get<WorldApiResponse>(`${config.covidDataApi}/api`, {
+            headers: {
+                'x-rapidapi-key': config.apiKey
+            },
+            timeout: config.apiTimeOut
+        });
+
+        if (!resp || !resp.data) {
+            throw new Error('No data for getWorldData');
+        }
+
+        saveDataInLocalStorage(resp.data, worldResponseKey);
+        return resp.data;
+    } catch (err) {
+        console.error(err);
+        return getItemFromLocalStorage(worldResponseKey);
     }
+};
 
-    return resp.data;
+export const getIndiaData = async (): Promise<IndiaApiResponse> => {
+    try {
+        const resp = await axios.get<IndiaApiResponse>(`${config.covidDataApi}/api_india`, {
+            headers: {
+                'x-rapidapi-key': config.apiKey
+            },
+            timeout: config.apiTimeOut
+        });
+    
+        if (!resp || !resp.data) {
+            throw new Error('No data for getIndiaData');
+        }
+
+        saveDataInLocalStorage(resp.data, indiaResponseKey);
+        return resp.data;
+    } catch (err) {
+        console.error(err);
+        return getItemFromLocalStorage(indiaResponseKey);
+    }
 };
 
 /**

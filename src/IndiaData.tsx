@@ -3,7 +3,7 @@ import { DataCard } from "./DataCard";
 import { IndiaApiResponse, StateData } from "./types";
 import { getIndiaData } from './util/common.util';
 import loader from './assets/loader.gif';
-import { LoadingWrapper, ErrorText, ShowMoreButton } from './common.styles';
+import { LoadingWrapper, ErrorText, ShowMoreButton, TimeInfo } from './common.styles';
 import config from "./config";
 
 export const IndiaData = () => {
@@ -49,6 +49,7 @@ export const IndiaData = () => {
       {indiaError && <ErrorText> {indiaError} </ErrorText>}
       {indiaApiData && (
         <>
+          <TimeInfo> Data taken at: {indiaApiData.total_values.lastupdatedtime.replace(' ', ', ')} </TimeInfo>
           <DataCard
             headerColor={"#8ea"}
             headerName={"India"}

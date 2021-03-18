@@ -15,9 +15,16 @@ export const ErrorText = st.div`
   margin-bottom: 2rem;
   font-size: 20px;
   font-weight: 700;
-  border-radius: 10px;
+  border-radius: 5px;
   max-width: 48rem;
   width: 90%;
+`;
+
+export const TimeInfo = st.h1`
+  font-size: 20px;
+  font-weight: 700;
+  font-style: italic;
+  color: #fff;
 `;
 
 export const ShowMoreButton = st.span`
