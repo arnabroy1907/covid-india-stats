@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import st from 'styled-components';
+import { formatNumberString } from './util/common.util';
 import { CardData, DistrictData } from './types';
 
 interface DataHeaderProps {
@@ -90,19 +91,6 @@ const DistWrapper = st.div`
     border-radius: 10px;
     margin: 1rem 0;
 `;
-
-const formatNumberString = (numberString: string) => {
-    let str = numberString;
-    str = numberString.replace(',', '');
-    if (str.length > 3) {
-        const lastThree = str.substr(str.length-3);
-        str = str.substr(0, str.length - 3);
-        str = str.replace(/\B(?<!\.\d*)(?=(\d{2})+(?!\d))/g, ",");
-        str = str + ',' + lastThree;
-        str = str.replace(',,', ',');
-    }
-    return str;
-};
 
 const sortDistList = (distArr: DistrictData[]) => {
     let finalList = distArr;

@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { DataCard } from "./DataCard";
 import { IndiaApiResponse, StateData } from "./types";
-import { getIndiaData } from './common.util';
+import { getIndiaData } from './util/common.util';
 import loader from './assets/loader.gif';
 import { LoadingWrapper, ErrorText, ShowMoreButton } from './common.styles';
 import config from "./config";

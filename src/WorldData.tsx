@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { DataCard } from "./DataCard";
 import { WorldApiResponse, WorldData as WorldDataType } from "./types";
-import { getWorldData } from './common.util';
+import { getWorldData } from './util/common.util';
 import loader from './assets/loader.gif';
 import { LoadingWrapper, ErrorText, ShowMoreButton } from './common.styles';
 import config from "./config";
